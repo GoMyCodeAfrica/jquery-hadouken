@@ -13,7 +13,7 @@
 		}
 		.hadouken {
 			position: absolute;
-		    top: 35%;
+		    top: 28%;
 		    left: 45%;
 		}
 		h1 {
@@ -24,8 +24,7 @@
 <body>
 
 	<div class="main">
-		<h1>Remaining Hadoukens: <span class="hadoukens">7</span></h1>
-		<h1 hidden>Reload the page to play again</h1>
+		<h1>Remaining hadoukens <span>7</span></h1>
 	</div>
 
 
@@ -34,17 +33,15 @@
 		integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 		crossorigin="anonymous"></script>
 	<script>
-		var hadoukensNum = 7;
-		var hadoukens = $('.hadoukens');
+		var hadoukens = 7;
 		var main = $('.main');
-
 		// insert '<img src="images/ryu_stand_still.png">' into the .main div
-		$('.main').append('<img src="images/ryu_stand_still.png">');
+		main.append('<img src="images/ryu_stand_still.png">');
 		
 
 		// animate ryu when hovered over
 		// Hint: think of using mouseover and mouseout events
-		$('.main img')
+		main.find('img')
 			.mouseover(function () {
 				this.src = 'images/ryu_animated.gif';
 			})
@@ -55,23 +52,21 @@
 
 		// When you click on ryu, he should do a "hadouken"
 		// Hint: think of using mousedown and mouseup and animate(to animate the hadouken gif).
-		$('.main img')
+		main.find('img')
 			.mousedown(function () {
-				if (hadoukensNum) {
+				if (hadoukens !== 0) {
 					this.src = 'images/ryu_hadoken_pose.png';
 					main.append('<img class="hadouken" src="images/hadouken.gif">');
 					$('.hadouken').animate(
-						{
-							'margin-left': "470px"
-						},
+						{'margin-left': '470px'},
 						500,
-						'swing',
+						'swing',	
 						function () {
 							this.remove();
 						}
 					);
-					hadoukensNum -= 1;
-					hadoukens.text(hadoukensNum);
+					hadoukens -= 1;
+					$('span').text(hadoukens);
 				}
 			})
 			.mouseup(function () {
